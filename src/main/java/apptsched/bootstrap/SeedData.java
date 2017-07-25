@@ -29,6 +29,9 @@ public class SeedData implements ApplicationListener<ContextRefreshedEvent>{
     @Autowired
     private AppointmentRepository appointmentRepository;
 
+    @Autowired
+    private PersonRepository personRepository;
+
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event){
         method1();
@@ -74,6 +77,23 @@ public class SeedData implements ApplicationListener<ContextRefreshedEvent>{
         Employee foundEmployee = employeeRepository.findOne(1);
         foundEmployee.setAppointmentHistory(foundList);
         employeeRepository.save(foundEmployee);
+
+        List<Appointment> foundList2 = new ArrayList<>();
+        Appointment appt4 = new Appointment("Check-Up", DateHelper.dateConstructor(2004, 1, 1, false), "F209", employeeRepository.findOne(1), clientRepository.findOne(2));
+        foundList2.add(appt4);
+        appointmentRepository.save(appt4);
+//        for(int i = 1; i <= appointmentRepository.count(); i++){
+//            if(appointmentRepository.findOne(i).getClient().getId()
+//                    .equals
+//                            (clientRepository.findOne(2).getId()))
+//            {
+//                foundList2.add(appointmentRepository.findOne(i));
+//            }
+//        }
+//
+        Client foundClient = clientRepository.findOne(2);
+        foundClient.setAppointmentHistory(foundList2);
+        clientRepository.save(foundClient);
 
     }
 }

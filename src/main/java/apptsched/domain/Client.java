@@ -9,12 +9,13 @@ import java.util.List;
  */
 
 @Entity
+//@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Client extends Person{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "ClientId")
-    private Integer id;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @Column(name = "ClientId")
+//    private Integer id;
 
     private Date customerSince;
 
@@ -33,13 +34,13 @@ public class Client extends Person{
         this.customerSince = customerSince;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
+//    public Integer getId() {
+//        return id;
+//    }
+//
+//    public void setId(Integer id) {
+//        this.id = id;
+//    }
 
     public Date getCustomerSince() {
         return customerSince;
