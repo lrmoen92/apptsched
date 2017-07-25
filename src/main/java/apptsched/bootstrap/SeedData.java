@@ -36,14 +36,13 @@ public class SeedData implements ApplicationListener<ContextRefreshedEvent>{
 
     public void method1(){
 
-        Date date1 = DateHelper.dateConstructor(1992, 1, 1, false);
-        Date date2 = DateHelper.dateConstructor(1995, 1, 1, false);
-        Date date3 = DateHelper.dateConstructor(1995, 1, 2, false);
         List<Date> e1PTO = new ArrayList<>();
-        e1PTO.add(date2);
-        e1PTO.add(date3);
+        e1PTO.add(DateHelper.dateConstructor(1995, 1, 1, false));
+        e1PTO.add(DateHelper.dateConstructor(1995, 1, 2, false));
 
-        Employee employee1 = new Employee("Logan", "Moen", "Robert", "lrmoen@gmail.com", "952-929-2233", date1, "Doctor");
+        Employee employee1 = new Employee("Logan", "Moen", "Robert", "lrmoen@gmail.com", "952-929-2233",
+                DateHelper.dateConstructor(1992, 1, 1, false),
+                "Doctor");
         Client client1 = new Client("Andrew", "Warnke", "Christopher", "acwarnke@gmail.com", "952-929-2234",
                 DateHelper.dateConstructor(1992, 3, 3, false)
         );
