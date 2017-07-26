@@ -12,18 +12,12 @@ import java.util.List;
 //@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Employee extends Person{
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.AUTO)
-//    @Column(name = "EmployeeId")
-//    private Integer id;
-
     private Date hireDate;
     private String position;
     private boolean isEmployed;
 
     @ElementCollection
     private List<Date> pto;
-
 
     public Employee(){}
 
@@ -51,14 +45,6 @@ public class Employee extends Person{
         this.isEmployed = true;
         this.pto = pto;
     }
-//
-//    public Integer getId() {
-//        return id;
-//    }
-//
-//    public void setId(Integer id) {
-//        this.id = id;
-//    }
 
     public Date getHireDate() {
         return hireDate;

@@ -2,7 +2,6 @@ package apptsched.domain;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by Logan.Moen on 7/24/2017.
@@ -12,10 +11,6 @@ import java.util.List;
 //@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Client extends Person{
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.AUTO)
-//    @Column(name = "ClientId")
-//    private Integer id;
 
     private Date customerSince;
 
@@ -33,14 +28,6 @@ public class Client extends Person{
     public Client(Date customerSince) {
         this.customerSince = customerSince;
     }
-
-//    public Integer getId() {
-//        return id;
-//    }
-//
-//    public void setId(Integer id) {
-//        this.id = id;
-//    }
 
     public Date getCustomerSince() {
         return customerSince;

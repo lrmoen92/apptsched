@@ -28,8 +28,6 @@ public class Appointment {
     @ManyToOne
     private Client client;
 
-
-
     public Appointment(){}
 
     public Appointment(String type, Date date, String roomNumber, Employee employee, Client client) {
