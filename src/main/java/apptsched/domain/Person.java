@@ -23,7 +23,7 @@ public class Person {
     private String phoneNumber;
     private String emailAddress;
 
-    @OneToMany
+    @ManyToMany
     private List<Appointment> appointmentHistory;
 
     public Person(){}

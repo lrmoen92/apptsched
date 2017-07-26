@@ -57,18 +57,19 @@ public class SeedData implements ApplicationListener<ContextRefreshedEvent>{
         clientRepository.save(client1);
 
         List<Appointment> e1Appt = new ArrayList<>();
-        Appointment appt1 = new Appointment("Meeting", DateHelper.dateConstructor(2000, 1, 1, false), "F204", employee1, client1);
-        Appointment appt2 = new Appointment("Check-Up", DateHelper.dateConstructor(2004, 1, 1, false), "F209", employee1, client1);
+        Appointment appt1 = new Appointment("Meeting", DateHelper.dateConstructor(2000, 1, 1, false), "F204", employeeRepository.findOne(1), clientRepository.findOne(2));
+        Appointment appt2 = new Appointment("Check-Up", DateHelper.dateConstructor(2004, 1, 1, false), "F209", employeeRepository.findOne(1), clientRepository.findOne(2));
+        Appointment appt4 = new Appointment("Check-Up", DateHelper.dateConstructor(2004, 1, 1, false), "F209", employeeRepository.findOne(1), clientRepository.findOne(2));
+
         e1Appt.add(appt1);
         e1Appt.add(appt2);
+        e1Appt.add(appt4);
 
         appointmentRepository.save(e1Appt);
 
         List<Appointment> foundList = new ArrayList<>();
         for(int i = 1; i <= appointmentRepository.count(); i++){
-            if(appointmentRepository.findOne(i).getEmployee().getId()
-                    .equals
-                            (employeeRepository.findOne(1).getId()))
+            if(appointmentRepository.findOne(i).getEmployee().getId().equals(1))
             {
                 foundList.add(appointmentRepository.findOne(i));
             }
@@ -79,18 +80,17 @@ public class SeedData implements ApplicationListener<ContextRefreshedEvent>{
         employeeRepository.save(foundEmployee);
 
         List<Appointment> foundList2 = new ArrayList<>();
-        Appointment appt4 = new Appointment("Check-Up", DateHelper.dateConstructor(2004, 1, 1, false), "F209", employeeRepository.findOne(1), clientRepository.findOne(2));
-        foundList2.add(appt4);
-        appointmentRepository.save(appt4);
-//        for(int i = 1; i <= appointmentRepository.count(); i++){
-//            if(appointmentRepository.findOne(i).getClient().getId()
-//                    .equals
-//                            (clientRepository.findOne(2).getId()))
-//            {
-//                foundList2.add(appointmentRepository.findOne(i));
-//            }
-//        }
-//
+        foundList2.add(appointmentRepository.findOne(3));
+
+        for(int i = 1; i <= appointmentRepository.count(); i++){
+            if(appointmentRepository.findOne(i).getClient().getId()
+                    .equals
+                            (clientRepository.findOne(2).getId()))
+            {
+                foundList2.add(appointmentRepository.findOne(i));
+            }
+        }
+
         Client foundClient = clientRepository.findOne(2);
         foundClient.setAppointmentHistory(foundList2);
         clientRepository.save(foundClient);
