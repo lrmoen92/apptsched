@@ -37,7 +37,7 @@ public class SeedData implements ApplicationListener<ContextRefreshedEvent>{
         method1();
     }
 
-    public void method1(){
+    private void method1(){
 
         List<Date> e1PTO = new ArrayList<>();
         e1PTO.add(DateHelper.dateConstructor(1995, 1, 1, false));
@@ -61,6 +61,9 @@ public class SeedData implements ApplicationListener<ContextRefreshedEvent>{
         Appointment appt2 = new Appointment("Check-Up", DateHelper.dateConstructor(2004, 1, 1, false), "F209", employeeRepository.findOne(1), clientRepository.findOne(2));
         Appointment appt4 = new Appointment("Review", DateHelper.dateConstructor(2004, 1, 6, false), "F209", employeeRepository.findOne(1), clientRepository.findOne(2));
 
+        appt1.setCompleted(true);
+        appt2.setCompleted(true);
+
         e1Appt.add(appt1);
         e1Appt.add(appt2);
         e1Appt.add(appt4);
@@ -73,7 +76,9 @@ public class SeedData implements ApplicationListener<ContextRefreshedEvent>{
         for(int i = 1; i <= appointmentRepository.count(); i++){
             if(appointmentRepository.findOne(i).getEmployee().getId()
                     .equals
-                            (foundEmployee.getId()))
+                            (foundEmployee.getId())
+                    &&
+                    (appointmentRepository.findOne(i).getCompleted()))
             {
                 foundList.add(appointmentRepository.findOne(i));
             }
@@ -88,7 +93,9 @@ public class SeedData implements ApplicationListener<ContextRefreshedEvent>{
         for(int i = 1; i <= appointmentRepository.count(); i++){
             if(appointmentRepository.findOne(i).getClient().getId()
                     .equals
-                            (foundClient.getId()))
+                            (foundClient.getId())
+                    &&
+                    (appointmentRepository.findOne(i).getCompleted()))
             {
                 foundList2.add(appointmentRepository.findOne(i));
             }

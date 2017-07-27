@@ -21,6 +21,7 @@ public class Appointment {
     private String type;
     private Date date;
     private String roomNumber;
+    private boolean completed;
 
     @ManyToOne
     private Employee employee;
@@ -36,6 +37,7 @@ public class Appointment {
         this.roomNumber = roomNumber;
         this.employee = employee;
         this.client = client;
+        this.completed = false;
     }
 
     public Integer getId() {
@@ -92,5 +94,13 @@ public class Appointment {
 
     public void setClient(Client client) {
         this.client = client;
+    }
+
+    public boolean getCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
     }
 }
