@@ -5,6 +5,9 @@ import apptsched.domain.Appointment;
 import apptsched.domain.Client;
 import apptsched.domain.Employee;
 import apptsched.repositories.*;
+import apptsched.services.AppointmentService;
+import apptsched.services.ClientService;
+import apptsched.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -21,16 +24,13 @@ import java.util.List;
 public class SeedData implements ApplicationListener<ContextRefreshedEvent>{
 
     @Autowired
-    private EmployeeRepository employeeRepository;
+    private EmployeeService employeeService;
 
     @Autowired
-    private ClientRepository clientRepository;
+    private ClientService clientService;
 
     @Autowired
-    private AppointmentRepository appointmentRepository;
-
-    @Autowired
-    private PersonRepository personRepository;
+    private AppointmentService appointmentService;
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event){
@@ -53,13 +53,13 @@ public class SeedData implements ApplicationListener<ContextRefreshedEvent>{
         employee1.setPto(e1PTO);
 
 
-        employeeRepository.save(employee1);
-        clientRepository.save(client1);
+        employeeService.save(employee1);
+        clientService.save(client1);
 
         List<Appointment> e1Appt = new ArrayList<>();
-        Appointment appt1 = new Appointment("Meeting", DateHelper.dateConstructor(2000, 1, 1, false), "F204", employeeRepository.findOne(1), clientRepository.findOne(2));
-        Appointment appt2 = new Appointment("Check-Up", DateHelper.dateConstructor(2004, 1, 1, false), "F209", employeeRepository.findOne(1), clientRepository.findOne(2));
-        Appointment appt4 = new Appointment("Review", DateHelper.dateConstructor(2004, 1, 6, false), "F209", employeeRepository.findOne(1), clientRepository.findOne(2));
+        Appointment appt1 = new Appointment("Meeting", DateHelper.dateConstructor(2000, 1, 1, false), "F204", employeeService.findOne(1), clientService.findOne(2));
+        Appointment appt2 = new Appointment("Check-Up", DateHelper.dateConstructor(2004, 1, 1, false), "F209", employeeService.findOne(1), clientService.findOne(2));
+        Appointment appt4 = new Appointment("Review", DateHelper.dateConstructor(2004, 1, 6, false), "F209", employeeService.findOne(1), clientService.findOne(2));
 
         appt1.setCompleted(true);
         appt2.setCompleted(true);
@@ -68,41 +68,41 @@ public class SeedData implements ApplicationListener<ContextRefreshedEvent>{
         e1Appt.add(appt2);
         e1Appt.add(appt4);
 
-        appointmentRepository.save(e1Appt);
+        appointmentService.save(e1Appt);
 
-        Employee foundEmployee = employeeRepository.findOne(1);
+        Employee foundEmployee = employeeService.findOne(1);
 
         List<Appointment> foundList = new ArrayList<>();
-        for(int i = 1; i <= appointmentRepository.count(); i++){
-            if(appointmentRepository.findOne(i).getEmployee().getId()
+        for(int i = 1; i <= appointmentService.count(); i++){
+            if(appointmentService.findOne(i).getEmployee().getId()
                     .equals
                             (foundEmployee.getId())
                     &&
-                    (appointmentRepository.findOne(i).getCompleted()))
+                    (appointmentService.findOne(i).getCompleted()))
             {
-                foundList.add(appointmentRepository.findOne(i));
+                foundList.add(appointmentService.findOne(i));
             }
         }
 
         foundEmployee.setAppointmentHistory(foundList);
-        employeeRepository.save(foundEmployee);
+        employeeService.save(foundEmployee);
 
-        Client foundClient = clientRepository.findOne(2);
+        Client foundClient = clientService.findOne(2);
 
         List<Appointment> foundList2 = new ArrayList<>();
-        for(int i = 1; i <= appointmentRepository.count(); i++){
-            if(appointmentRepository.findOne(i).getClient().getId()
+        for(int i = 1; i <= appointmentService.count(); i++){
+            if(appointmentService.findOne(i).getClient().getId()
                     .equals
                             (foundClient.getId())
                     &&
-                    (appointmentRepository.findOne(i).getCompleted()))
+                    (appointmentService.findOne(i).getCompleted()))
             {
-                foundList2.add(appointmentRepository.findOne(i));
+                foundList2.add(appointmentService.findOne(i));
             }
         }
 
         foundClient.setAppointmentHistory(foundList2);
-        clientRepository.save(foundClient);
+        clientService.save(foundClient);
 
     }
 }
