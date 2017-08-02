@@ -34,7 +34,7 @@ public class SeedData implements ApplicationListener<ContextRefreshedEvent>{
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event){
-        method1();
+        //method1();
     }
 
     private void method1(){
@@ -43,11 +43,9 @@ public class SeedData implements ApplicationListener<ContextRefreshedEvent>{
         e1PTO.add(DateHelper.dateConstructor(1995, 1, 1, false));
         e1PTO.add(DateHelper.dateConstructor(1995, 1, 2, false));
 
-        Employee employee1 = new Employee("Logan", "Moen", "Robert", "lrmoen@gmail.com", "952-929-2233",
-                DateHelper.dateConstructor(1992, 1, 1, false),
+        Employee employee1 = new Employee("Logan", "Moen", "Robert", "lrmoen@gmail.com", "952-929-2233",  (DateHelper.dateConstructor(1992, 1, 1, false)),
                 "Doctor");
-        Client client1 = new Client("Andrew", "Warnke", "Christopher", "acwarnke@gmail.com", "952-929-2234",
-                DateHelper.dateConstructor(1992, 3, 3, false)
+        Client client1 = new Client("Andrew", "Warnke", "Christopher", "acwarnke@gmail.com", "952-929-2234",  (DateHelper.dateConstructor(1992, 3, 3, false))
         );
 
         employee1.setPto(e1PTO);
@@ -57,9 +55,9 @@ public class SeedData implements ApplicationListener<ContextRefreshedEvent>{
         clientService.save(client1);
 
         List<Appointment> e1Appt = new ArrayList<>();
-        Appointment appt1 = new Appointment("Meeting", DateHelper.dateConstructor(2000, 1, 1, false), "F204", employeeService.findOne(1), clientService.findOne(2));
-        Appointment appt2 = new Appointment("Check-Up", DateHelper.dateConstructor(2004, 1, 1, false), "F209", employeeService.findOne(1), clientService.findOne(2));
-        Appointment appt4 = new Appointment("Review", DateHelper.dateConstructor(2004, 1, 6, false), "F209", employeeService.findOne(1), clientService.findOne(2));
+        Appointment appt1 = new Appointment("Meeting", (DateHelper.dateConstructor(2000, 1, 1, false)), "F204", employeeService.findOne(1), clientService.findOne(2));
+        Appointment appt2 = new Appointment("Check-Up", (DateHelper.dateConstructor(2004, 1, 1, false)), "F209", employeeService.findOne(1), clientService.findOne(2));
+        Appointment appt4 = new Appointment("Review", (DateHelper.dateConstructor(2004, 1, 6, false)), "F209", employeeService.findOne(1), clientService.findOne(2));
 
         appt1.setCompleted(true);
         appt2.setCompleted(true);
