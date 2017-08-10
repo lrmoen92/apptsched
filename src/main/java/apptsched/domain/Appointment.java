@@ -19,7 +19,7 @@ public class Appointment {
     private Integer version;
 
     private String type;
-    private Date date;
+    private String date;
     private String roomNumber;
     private boolean completed;
 
@@ -31,7 +31,7 @@ public class Appointment {
 
     public Appointment(){}
 
-    public Appointment(String type, Date date, String roomNumber, Employee employee, Client client) {
+    public Appointment(String type, String date, String roomNumber, Employee employee, Client client) {
         this.type = type;
         this.date = date;
         this.roomNumber = roomNumber;
@@ -64,11 +64,11 @@ public class Appointment {
         this.type = type;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

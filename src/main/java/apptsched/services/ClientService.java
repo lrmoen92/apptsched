@@ -10,6 +10,8 @@ public interface ClientService {
 
     Client findOne(Integer id);
 
+    Client findByEmail(String email);
+
     boolean exists(Integer id);
 
     Iterable<Client> findAll();

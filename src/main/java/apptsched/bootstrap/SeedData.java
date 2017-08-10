@@ -23,41 +23,53 @@ import java.util.List;
 @Component
 public class SeedData implements ApplicationListener<ContextRefreshedEvent>{
 
-    @Autowired
-    private EmployeeService employeeService;
+
+    private final EmployeeService employeeService;
+    private final ClientService clientService;
+    private final AppointmentService appointmentService;
 
     @Autowired
-    private ClientService clientService;
-
-    @Autowired
-    private AppointmentService appointmentService;
+    public SeedData(EmployeeService employeeService, ClientService clientService, AppointmentService appointmentService){
+        this.appointmentService = appointmentService;
+        this.clientService = clientService;
+        this.employeeService = employeeService;
+    }
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event){
-        //method1();
+//        method1();
     }
 
     private void method1(){
+//        appointmentService.deleteAll();
+//        employeeService.deleteAll();
+//        clientService.deleteAll();
 
         List<Date> e1PTO = new ArrayList<>();
         e1PTO.add(DateHelper.dateConstructor(1995, 1, 1, false));
         e1PTO.add(DateHelper.dateConstructor(1995, 1, 2, false));
+        List<Date> e2PTO = new ArrayList<>();
+        e1PTO.add(DateHelper.dateConstructor(1996, 1, 1, false));
+        e1PTO.add(DateHelper.dateConstructor(1996, 1, 2, false));
 
-        Employee employee1 = new Employee("Logan", "Moen", "Robert", "lrmoen@gmail.com", "952-929-2233",  (DateHelper.dateConstructor(1992, 1, 1, false)),
-                "Doctor");
-        Client client1 = new Client("Andrew", "Warnke", "Christopher", "acwarnke@gmail.com", "952-929-2234",  (DateHelper.dateConstructor(1992, 3, 3, false))
-        );
+        Employee employee1 = new Employee("Logan", "Moen", "Robert", "lrmoen@astontech.com", "952-929-2233",  (DateHelper.dateConstructor(1992, 1, 1, false)), "Doctor");
+        Employee employee2 = new Employee("Jay", "Moen", "Andrew", "jamoen@astontech.com", "952-929-2133",  (DateHelper.dateConstructor(1997, 1, 1, false)), "Lawyer");
+        Client client1 = new Client("Andrew", "Warnke", "Christopher", "acwarnke@gmail.com", "952-929-2234",  (DateHelper.dateConstructor(1992, 3, 3, false)));
+        Client client2 = new Client("Chris", "Warnke", "Rodney", "crwarnke@gmail.com", "952-929-2264",  (DateHelper.dateConstructor(1996, 3, 3, false)));
 
         employee1.setPto(e1PTO);
+        employee1.setPto(e2PTO);
 
 
         employeeService.save(employee1);
+        employeeService.save(employee2);
         clientService.save(client1);
+        clientService.save(client2);
 
         List<Appointment> e1Appt = new ArrayList<>();
-        Appointment appt1 = new Appointment("Meeting", (DateHelper.dateConstructor(2000, 1, 1, false)), "F204", employeeService.findOne(1), clientService.findOne(2));
-        Appointment appt2 = new Appointment("Check-Up", (DateHelper.dateConstructor(2004, 1, 1, false)), "F209", employeeService.findOne(1), clientService.findOne(2));
-        Appointment appt4 = new Appointment("Review", (DateHelper.dateConstructor(2004, 1, 6, false)), "F209", employeeService.findOne(1), clientService.findOne(2));
+        Appointment appt1 = new Appointment("Meeting", (DateHelper.dateConstructor(2000, 1, 1, false).toString()), "F204", employeeService.findOne(1), clientService.findOne(3));
+        Appointment appt2 = new Appointment("Check-Up", (DateHelper.dateConstructor(2004, 1, 1, false).toString()), "F209", employeeService.findOne(2), clientService.findOne(3));
+        Appointment appt4 = new Appointment("Review", (DateHelper.dateConstructor(2004, 1, 6, false).toString()), "F209", employeeService.findOne(1), clientService.findOne(3));
 
         appt1.setCompleted(true);
         appt2.setCompleted(true);
@@ -68,39 +80,9 @@ public class SeedData implements ApplicationListener<ContextRefreshedEvent>{
 
         appointmentService.save(e1Appt);
 
-        Employee foundEmployee = employeeService.findOne(1);
 
-        List<Appointment> foundList = new ArrayList<>();
-        for(int i = 1; i <= appointmentService.count(); i++){
-            if(appointmentService.findOne(i).getEmployee().getId()
-                    .equals
-                            (foundEmployee.getId())
-                    &&
-                    (appointmentService.findOne(i).getCompleted()))
-            {
-                foundList.add(appointmentService.findOne(i));
-            }
-        }
-
-        foundEmployee.setAppointmentHistory(foundList);
-        employeeService.save(foundEmployee);
-
-        Client foundClient = clientService.findOne(2);
-
-        List<Appointment> foundList2 = new ArrayList<>();
-        for(int i = 1; i <= appointmentService.count(); i++){
-            if(appointmentService.findOne(i).getClient().getId()
-                    .equals
-                            (foundClient.getId())
-                    &&
-                    (appointmentService.findOne(i).getCompleted()))
-            {
-                foundList2.add(appointmentService.findOne(i));
-            }
-        }
-
-        foundClient.setAppointmentHistory(foundList2);
-        clientService.save(foundClient);
+        Appointment apt = new Appointment("Consulting", new Date().toString(), "F449", employeeService.findOne(1), clientService.findOne(4));
+        appointmentService.save(apt);
 
     }
 }

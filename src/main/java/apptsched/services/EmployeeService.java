@@ -10,6 +10,8 @@ public interface EmployeeService {
 
     Employee findOne(Integer id);
 
+    Employee findByEmail(String email);
+
     boolean exists(Integer id);
 
     Iterable<Employee> findAll();

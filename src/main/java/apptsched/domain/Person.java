@@ -23,8 +23,8 @@ public class Person {
     private String phoneNumber;
     private String emailAddress;
 
-    @ManyToMany
-    private List<Appointment> appointmentHistory;
+//    @ManyToMany
+//    private List<Appointment> appointmentHistory;
 
     public Person(){}
 
@@ -92,11 +92,11 @@ public class Person {
         this.emailAddress = emailAddress;
     }
 
-    public List<Appointment> getAppointmentHistory() {
-        return appointmentHistory;
-    }
-
-    public void setAppointmentHistory(List<Appointment> appointmentHistory) {
-        this.appointmentHistory = appointmentHistory;
-    }
+//    public List<Appointment> getAppointmentHistory() {
+//        return appointmentHistory;
+//    }
+//
+//    public void setAppointmentHistory(List<Appointment> appointmentHistory) {
+//        this.appointmentHistory = appointmentHistory;
+//    }
 }

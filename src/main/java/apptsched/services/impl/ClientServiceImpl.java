@@ -9,8 +9,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class ClientServiceImpl implements ClientService {
 
+    private final ClientRepository clientRepository;
+
     @Autowired
-    private ClientRepository clientRepository;
+    public ClientServiceImpl(ClientRepository clientRepository){
+        this.clientRepository = clientRepository;
+    }
 
     @Override
     public Client save(Client object) {
@@ -25,6 +29,17 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public Client findOne(Integer id) {
         return clientRepository.findOne(id);
+    }
+
+    @Override
+    public Client findByEmail(String email) {
+        Client client = new Client();
+        for(Client c : clientRepository.findAll()){
+            if(c.getEmailAddress().equals(email)){
+                client = c;
+            }
+        }
+        return client;
     }
 
     @Override

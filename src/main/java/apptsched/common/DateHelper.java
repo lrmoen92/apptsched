@@ -8,6 +8,7 @@ import java.util.Date;
  */
 public abstract class DateHelper {
 
+
     public static Date dateConstructor(int year, int month, int day, boolean curTime){
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.YEAR, year);

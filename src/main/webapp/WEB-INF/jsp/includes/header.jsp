@@ -3,18 +3,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+
 <html>
 <head>
 
     <%--FAVICON--%>
 
-    <c:url value="/webjars/jquery/3.2.1/jquery.min.js" var="jquery"/>
+    <c:url value="/webjars/jquery/2.1.4/jquery.min.js" var="jquery"/>
     <script src="${jquery}"></script>
 
-    <c:url value="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js" var="bootstrapJS"/>
+    <c:url value="/webjars/bootstrap/3.3.4/js/bootstrap.min.js" var="bootstrapJS"/>
     <script src="${bootstrapJS}"></script>
 
-    <c:url value="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" var="bootstrapCSS"/>
+    <c:url value="/webjars/bootstrap/3.3.4/css/bootstrap.min.css" var="bootstrapCSS"/>
     <link rel="stylesheet" href="${bootstrapCSS}" media="screen" />
 
     <c:url value="../../static/js/apptsched.js" var="common" />

@@ -9,8 +9,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
+    private final EmployeeRepository employeeRepository;
+
     @Autowired
-    private EmployeeRepository employeeRepository;
+    public EmployeeServiceImpl(EmployeeRepository employeeRepository){
+        this.employeeRepository = employeeRepository;
+    }
 
     @Override
     public Employee save(Employee object) {
@@ -25,6 +29,17 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee findOne(Integer id) {
         return employeeRepository.findOne(id);
+    }
+
+    @Override
+    public Employee findByEmail(String email) {
+        Employee employee = new Employee();
+        for (Employee e : employeeRepository.findAll()) {
+            if (e.getEmailAddress().equals(email)) {
+                employee = e;
+            }
+        }
+        return employee;
     }
 
     @Override
