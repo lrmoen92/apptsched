@@ -10,9 +10,8 @@ import java.security.Principal;
 @Controller
 public class EmployeeController {
 
-    @RequestMapping(value = "/employee")
-    public String getEmployeePage(Authentication authentication, Model model){
-        model.addAttribute("activeUser", authentication.getName());
+    @RequestMapping(value = "/employee/")
+    public String getEmployeePage(){
         return "employee";
     }
 }

@@ -12,14 +12,12 @@ import java.util.List;
 @RequestMapping(value = "/api/employee")
 public class EmployeeRest {
 
-
     private final EmployeeService employeeService;
 
     @Autowired
     public EmployeeRest(EmployeeService employeeService){
         this.employeeService = employeeService;
     }
-
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public Iterable<Employee> getAllEmployees(){

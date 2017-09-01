@@ -41,4 +41,14 @@ public class IndexController {
         return "login";
     }
 
+    @RequestMapping(value = "/profile", method = RequestMethod.GET)
+    public String profile(){
+        return "profile";
+    }
+
+    @RequestMapping(value = "/angular", method = RequestMethod.GET)
+    public String angular(){
+        return "angularTesting/angular";
+    }
+
 }

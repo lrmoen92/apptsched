@@ -27,6 +27,9 @@
     <c:url value="../../static/css/bootstrap.min.css" var="bootstrapSlate" />
     <link rel="stylesheet" href="${bootstrapSlate}" media="screen" />
 
+    <c:url value="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js" var="angular" />
+    <script src="${angular}"></script>
+
     <title>Appointment Scheduler</title>
 
 

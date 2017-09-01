@@ -1,6 +1,9 @@
 package apptsched.services;
 
 import apptsched.domain.Employee;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 public interface EmployeeService {
 
@@ -25,4 +28,8 @@ public interface EmployeeService {
     void delete(Iterable<Employee> objectIterable);
 
     void deleteAll();
+
+    Iterable<Employee> findAll(Sort var1);
+
+    Page<Employee> findAll(Pageable var1);
 }

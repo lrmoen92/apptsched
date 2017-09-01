@@ -22,8 +22,12 @@ import java.util.List;
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 
+    private final DataSource dataSource;
+
     @Autowired
-    private DataSource dataSource;
+    public SecurityConfiguration(DataSource dataSource){
+        this.dataSource = dataSource;
+    }
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
@@ -34,7 +38,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 
         auth.userDetailsService(userDetailsService).passwordEncoder(encoder);
         auth.jdbcAuthentication().dataSource(dataSource);
-
 
         if(!userDetailsService.userExists("admin")){
             List<GrantedAuthority> authorities = new ArrayList<>();
@@ -55,40 +58,43 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 
             userDetailsService.createUser(userDetails);
         }
-
-
     }
 
 
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception{
-//        httpSecurity
-//                .authorizeRequests().antMatchers("/").permitAll()
-//                .and()
-//                .authorizeRequests().antMatchers("/console/**").permitAll();
-
         httpSecurity
-                .authorizeRequests().antMatchers("/webjars/bootstrap/**").permitAll()
-                .and()
-                .authorizeRequests().antMatchers("/webjars/jquery/**").permitAll()
-                .and()
-                .authorizeRequests().antMatchers("/static/**").permitAll()
-                .and()
-                .authorizeRequests().antMatchers("/login/**").permitAll()
-                .and()
-                .authorizeRequests().antMatchers("/register/**").permitAll()
-                .and()
                 .authorizeRequests().antMatchers("/").permitAll()
                 .and()
-                .authorizeRequests().antMatchers("/console/**").hasAuthority("DBADMIN")
-                .and()
-                .authorizeRequests().antMatchers("/admin/**").hasAuthority("ADMIN")
-                .and()
-                .authorizeRequests().antMatchers("/client/**").hasAuthority("CLIENTUSER")
-                .and()
-                .authorizeRequests().antMatchers("/employee/**").hasAuthority("EMPLOYEEUSER")
-                .anyRequest().authenticated();
+                .authorizeRequests().antMatchers("/console/**").permitAll();
+//        httpSecurity
+//                .authorizeRequests().antMatchers("/webjars/bootstrap/**").permitAll()
+//                .and()
+//                .authorizeRequests().antMatchers("/webjars/jquery/**").permitAll()
+//                .and()
+//                .authorizeRequests().antMatchers("/static/**").permitAll()
+//                .and()
+//                .authorizeRequests().antMatchers("/login/**").permitAll()
+//                .and()
+//                .authorizeRequests().antMatchers("/register/**").permitAll()
+//                .and()
+//                .authorizeRequests().antMatchers("/").permitAll()
+//                .and()
+//                .authorizeRequests().antMatchers("/api/register/").permitAll()
+//                .and()
+//                .authorizeRequests().antMatchers("/api/user/").permitAll()
+//                .and()
+//                .authorizeRequests().antMatchers("/console/**").hasAuthority("DBADMIN")
+//                .and()
+//                .authorizeRequests().antMatchers("/admin/**").hasAuthority("ADMIN")
+//                .and()
+//                .authorizeRequests().antMatchers("/client/**").hasAuthority("CLIENTUSER")
+//                .and()
+//                .authorizeRequests().antMatchers("/employee/**").hasAuthority("EMPLOYEEUSER")
+//                .and()
+//                .authorizeRequests().antMatchers("/profile").hasAnyAuthority("CLIENTUSER", "EMPLOYEEUSER", "ADMIN", "DBADMIN")
+//                .anyRequest().authenticated();
 
         httpSecurity
                 .formLogin().loginPage("/login").loginProcessingUrl("/login.do")
@@ -96,7 +102,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
                 .failureUrl("/login?err=1")
                 .usernameParameter("username")
                 .passwordParameter("password");
-
 
         httpSecurity.csrf().disable();
         httpSecurity.headers().frameOptions().disable();

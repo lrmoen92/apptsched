@@ -1,5 +1,7 @@
-package apptsched.common;
+package apptsched.common.EmailValidator;
 
+
+import apptsched.common.EmailValidator.EmailValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

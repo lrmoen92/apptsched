@@ -4,6 +4,9 @@ import apptsched.domain.Employee;
 import apptsched.repositories.EmployeeRepository;
 import apptsched.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -33,13 +36,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee findByEmail(String email) {
-        Employee employee = new Employee();
         for (Employee e : employeeRepository.findAll()) {
             if (e.getEmailAddress().equals(email)) {
-                employee = e;
+                return e;
             }
         }
-        return employee;
+        return null;
     }
 
     @Override
@@ -75,5 +77,15 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public void deleteAll() {
         employeeRepository.deleteAll();
+    }
+
+    @Override
+    public Iterable<Employee> findAll(Sort var1) {
+        return employeeRepository.findAll(var1);
+    }
+
+    @Override
+    public Page<Employee> findAll(Pageable var1) {
+        return employeeRepository.findAll(var1);
     }
 }

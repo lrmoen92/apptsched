@@ -1,3 +1,7 @@
+package apptsched.services;
+
+import apptsched.domain.Person;
+
 public interface PersonService {
 
     Person save(Person object);

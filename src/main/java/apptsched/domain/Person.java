@@ -1,5 +1,7 @@
 package apptsched.domain;
 
+import org.hibernate.annotations.DiscriminatorOptions;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -23,8 +25,6 @@ public class Person {
     private String phoneNumber;
     private String emailAddress;
 
-//    @ManyToMany
-//    private List<Appointment> appointmentHistory;
 
     public Person(){}
 
@@ -91,12 +91,4 @@ public class Person {
     public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
     }
-
-//    public List<Appointment> getAppointmentHistory() {
-//        return appointmentHistory;
-//    }
-//
-//    public void setAppointmentHistory(List<Appointment> appointmentHistory) {
-//        this.appointmentHistory = appointmentHistory;
-//    }
 }

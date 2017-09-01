@@ -55,6 +55,7 @@ public class UserServiceImpl implements UserService{
         try{
             userDetailsService.createUser(userDetails);
         }catch(Exception ex){
+            System.out.println(ex.toString());
             return null;
         }
 

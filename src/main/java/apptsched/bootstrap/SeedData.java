@@ -4,13 +4,15 @@ import apptsched.common.DateHelper;
 import apptsched.domain.Appointment;
 import apptsched.domain.Client;
 import apptsched.domain.Employee;
-import apptsched.repositories.*;
 import apptsched.services.AppointmentService;
 import apptsched.services.ClientService;
 import apptsched.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -38,6 +40,10 @@ public class SeedData implements ApplicationListener<ContextRefreshedEvent>{
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event){
 //        method1();
+//        Pageable p = new PageRequest(0, 1, Sort.Direction.DESC, "emailAddress");
+//        Sort email = new Sort(Sort.Direction.ASC, "emailAddress");
+//        for(Employee e : employeeService.findAll(p))
+//        System.out.println(e.getFirstName() + " " + e.getLastName() + ": " + e.getEmailAddress());
     }
 
     private void method1(){
