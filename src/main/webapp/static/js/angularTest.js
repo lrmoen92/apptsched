@@ -1,10 +1,3 @@
-function showUpdateModal(){
-    $('#updateModal').modal('show');
-}
-
-function showDeleteModal(){
-    $('#deleteModal').modal('show');
-}
 
 var angMod = angular.module('myApp', []);
 
@@ -14,7 +7,6 @@ angMod.service('ajaxService', function($http){
     this.getEmployee = function(id) {return $http.get(urlBase + id)};
     this.getEmployeeByEmail = function(email) {return $http.get(urlBase + '?email=' + email)};
     this.insertEmployee = function(emp) {return $http.put(urlBase, emp)};
-    this.updateEmployee = function(emp) {return $http.put(urlBase + emp.id, emp)};
     this.deleteEmployee = function(id) {return $http.delete(urlBase + id)};
 });
 
@@ -23,6 +15,42 @@ angMod.controller('myCtrl', function($scope, ajaxService){
     ajaxService.getEmployees().then(function (response){
         $scope.employees = response.data;
     });
+
+    $scope.showNewEmployeeModal = function showNewEmployeeModal(){
+        $('#employeeId').val("");
+        $('#employeeVersion').val("");
+        $('#firstName').val("");
+        $('#lastName').val("");
+        $('#middleName').val("");
+        $('#phoneNumber').val("");
+        $('#emailAddress').val("");
+        $('#hireDate').val("");
+        $('#position').val("");
+        $('#isEmployed').val("");
+        $('#pto').val("");
+        $('#updateModal').modal('show');
+    };
+
+
+    $scope.showUpdateModal = function showUpdateModal(employee){
+        $('#employeeId').val(employee.id);
+        $('#employeeVersion').val(employee.version);
+        $('#firstName').val(employee.firstName);
+        $('#lastName').val(employee.lastName);
+        $('#middleName').val(employee.middleName);
+        $('#phoneNumber').val(employee.phoneNumber);
+        $('#emailAddress').val(employee.emailAddress);
+        $('#hireDate').val(employee.hireDate);
+        $('#position').val(employee.position);
+        $('#isEmployed').val(employee.isEmployed);
+        $('#pto').val(employee.pto);
+        $('#updateModal').modal('show');
+    };
+
+    $scope.showDeleteModal = function showDeleteModal(employee){
+        $('#deleteId').val(employee.id);
+        $('#deleteModal').modal('show');
+    };
 
     function getEmployee(id) {
         ajaxService.getEmployee(id).then(function (response) {
@@ -45,15 +73,8 @@ angMod.controller('myCtrl', function($scope, ajaxService){
             //$scope insert?
         }, function (error){
             $scope.status = error.message;
-        })
-    }
-
-    function updateEmployee(emp){
-        ajaxService.updateEmployee(emp).then(function (response){
-            //$scope update?
-        }, function (error){
-            $scope.status = error.message;
-        })
+        });
+        window.location.reload();
     }
 
     function deleteEmployee(id){
@@ -61,38 +82,48 @@ angMod.controller('myCtrl', function($scope, ajaxService){
             //$scope delete?
         }, function (error){
             $scope.status = error.message;
-        })
+        });
+        window.location.reload();
     }
 
     $(document).ready(function(){
         $('#empId').change(function(){
             getEmployee($('#empId').val());
         });
-    });
 
-    $(document).ready(function(){
+
         $('#empEmail').change(function () {
             getEmployeeByEmail($('#empEmail').val());
         });
-    });
 
-    $(document).ready(function(){
+
         $('#updateEmployeeBtn').click(function () {
             var employee = {
-                id: $('#employeeId'),
-                version: $('#employeeVersion'),
-                firstName: $('#firstName'),
-                lastName: $('#lastName'),
-                middleName: $('#middleName'),
-                phoneNumber: $('#phoneNumber'),
-                emailAddress: $('#emailAddress'),
-                hireDate: $('#hireDate'),
-                position: $('#position'),
-                isEmployed: $('#isEmployed'),
-                pto: $('#pto')
+                id: $('#employeeId').val(),
+                version: $('#employeeVersion').val(),
+                firstName: $('#firstName').val(),
+                lastName: $('#lastName').val(),
+                middleName: $('#middleName').val(),
+                phoneNumber: $('#phoneNumber').val(),
+                emailAddress: $('#emailAddress').val(),
+                hireDate: $('#hireDate').val(),
+                position: $('#position').val(),
+                isEmployed: $('#isEmployed').val(),
+                pto: [
+                    $('#pto').val()
+                ]
             };
             console.log(employee);
-            //updateEmployee(employee)
+            var string = JSON.stringify(employee);
+            insertEmployee(string);
         });
+
+
+        $('#deleteEmployeeBtn').click(function(){
+            deleteEmployee($('#deleteId').val());
+        });
+
     });
+
+
 });

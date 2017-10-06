@@ -1,9 +1,11 @@
 package apptsched.domain;
 
+import apptsched.common.DateHelper;
 import org.hibernate.annotations.DiscriminatorOptions;
 
 import javax.persistence.*;
 import java.util.List;
+
 
 /**
  * Created by Logan.Moen on 7/24/2017.

@@ -5,7 +5,9 @@ function buildTable(){
         console.log(data);
         $.ajax({url: '/api/appointment/', aysnc: 'true', success: function(data2){
             $.each(data2, function(idx, appt){
+
                 console.log(appt);
+
                 if(appt.client.emailAddress == data && appt.completed == false)
                 {
                     $('#clientAppointment-table').find('tbody')
@@ -16,9 +18,8 @@ function buildTable(){
                             .append($('<td>').text(appt.roomNumber))
                             .append($('<td>').text(appt.employee.firstName + " " + appt.employee.lastName))
                             .append($('<td>').text(appt.client.firstName + " " + appt.client.lastName))
-                        )
-                }
-            })
+                        )}
+            });
         }})
     }});
 }

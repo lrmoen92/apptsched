@@ -51,4 +51,9 @@ public class IndexController {
         return "angularTesting/angular";
     }
 
+    @RequestMapping(value = "/elastictest", method = RequestMethod.GET)
+    public String elastic() {
+        return "elastictest";
+    }
+
 }

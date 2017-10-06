@@ -64,37 +64,37 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception{
-        httpSecurity
-                .authorizeRequests().antMatchers("/").permitAll()
-                .and()
-                .authorizeRequests().antMatchers("/console/**").permitAll();
 //        httpSecurity
-//                .authorizeRequests().antMatchers("/webjars/bootstrap/**").permitAll()
-//                .and()
-//                .authorizeRequests().antMatchers("/webjars/jquery/**").permitAll()
-//                .and()
-//                .authorizeRequests().antMatchers("/static/**").permitAll()
-//                .and()
-//                .authorizeRequests().antMatchers("/login/**").permitAll()
-//                .and()
-//                .authorizeRequests().antMatchers("/register/**").permitAll()
-//                .and()
 //                .authorizeRequests().antMatchers("/").permitAll()
 //                .and()
-//                .authorizeRequests().antMatchers("/api/register/").permitAll()
-//                .and()
-//                .authorizeRequests().antMatchers("/api/user/").permitAll()
-//                .and()
-//                .authorizeRequests().antMatchers("/console/**").hasAuthority("DBADMIN")
-//                .and()
-//                .authorizeRequests().antMatchers("/admin/**").hasAuthority("ADMIN")
-//                .and()
-//                .authorizeRequests().antMatchers("/client/**").hasAuthority("CLIENTUSER")
-//                .and()
-//                .authorizeRequests().antMatchers("/employee/**").hasAuthority("EMPLOYEEUSER")
-//                .and()
-//                .authorizeRequests().antMatchers("/profile").hasAnyAuthority("CLIENTUSER", "EMPLOYEEUSER", "ADMIN", "DBADMIN")
-//                .anyRequest().authenticated();
+//                .authorizeRequests().antMatchers("/console/**").permitAll();
+        httpSecurity
+                .authorizeRequests().antMatchers("/webjars/bootstrap/**").permitAll()
+                .and()
+                .authorizeRequests().antMatchers("/webjars/jquery/**").permitAll()
+                .and()
+                .authorizeRequests().antMatchers("/static/**").permitAll()
+                .and()
+                .authorizeRequests().antMatchers("/login/**").permitAll()
+                .and()
+                .authorizeRequests().antMatchers("/register/**").permitAll()
+                .and()
+                .authorizeRequests().antMatchers("/").permitAll()
+                .and()
+                .authorizeRequests().antMatchers("/api/register/").permitAll()
+                .and()
+                .authorizeRequests().antMatchers("/api/user/").permitAll()
+                .and()
+                .authorizeRequests().antMatchers("/console/**").hasAuthority("DBADMIN")
+                .and()
+                .authorizeRequests().antMatchers("/admin/**").hasAuthority("ADMIN")
+                .and()
+                .authorizeRequests().antMatchers("/client/**").hasAuthority("CLIENTUSER")
+                .and()
+                .authorizeRequests().antMatchers("/employee/**").hasAuthority("EMPLOYEEUSER")
+                .and()
+                .authorizeRequests().antMatchers("/profile").hasAnyAuthority("CLIENTUSER", "EMPLOYEEUSER", "ADMIN", "DBADMIN")
+                .anyRequest().authenticated();
 
         httpSecurity
                 .formLogin().loginPage("/login").loginProcessingUrl("/login.do")

@@ -32,6 +32,7 @@ function saveAppointment(){
                         employee: employee,
                         client: client
                     };
+
                     console.log(appointment);
                     var appointmentString = JSON.stringify(appointment);
 
